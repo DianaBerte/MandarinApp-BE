@@ -2,10 +2,11 @@
  
 ## Technologies
 <ul>
-<li> ExpressJS
+<li> Express.JS
 <li> MongoDB
-<li> NodeJS
+<li> Node.JS
 <li> OAuth
+<li> Socket.io
 <li> Cloud deployment: Cyclic
 </ul>
 
