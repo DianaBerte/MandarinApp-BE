@@ -10,6 +10,7 @@ gamesRouter.post("/", async (req, res, next) => {
         const newGame = new GamesModel(req.body)
         const { _id } = await newGame.save()
         res.status(201).send({ _id })
+        console.log("_id: ", _id)
     } catch (error) {
         next(error)
     }
