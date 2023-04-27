@@ -16,4 +16,13 @@ gamesRouter.post("/", async (req, res, next) => {
     }
 })
 
+gamesRouter.get("/", async (req, res, next) => {
+    try {
+        const games = await GamesModel.find()
+        res.send(games)
+    } catch (error) {
+        next(error)
+    }
+})
+
 export default gamesRouter
