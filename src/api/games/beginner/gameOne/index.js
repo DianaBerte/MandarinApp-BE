@@ -25,6 +25,19 @@ gamesRouter.get("/", async (req, res, next) => {
     }
 })
 
+gamesRouter.put("/:id", async (req, res, next) => {
+    try {
+        const updatedGame = await GamesModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        if (updatedGame) {
+            res.send(updatedGame)
+        } else {
+            next(createHttpError(404, `Game with id ${req.params.id} not found!`))
+        }
+    } catch (error) {
+        next(error)
+    }
+})
+
 gamesRouter.delete("/:id", async (req, res, next) => {
     try {
         const deletedGame = await GamesModel.findByIdAndDelete(req.params.id)
