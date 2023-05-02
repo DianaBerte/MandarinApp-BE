@@ -25,4 +25,17 @@ gamesRouter.get("/", async (req, res, next) => {
     }
 })
 
+gamesRouter.delete("/:id", async (req, res, next) => {
+    try {
+        const deletedGame = await GamesModel.findByIdAndDelete(req.params.id)
+        if (deletedGame) {
+            res.status(204).send()
+        } else {
+            next(createHttpError(404, `Game with id ${req.params.id} not found!`))
+        }
+    } catch (error) {
+        next(error)
+    }
+})
+
 export default gamesRouter
