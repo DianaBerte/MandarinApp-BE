@@ -19,7 +19,7 @@ const questionSchema = new Schema({
 );
 
 const gameSchema = new Schema({
-    questions: [String],
+    question: [String],
     answers: [questionSchema]
 })
 
