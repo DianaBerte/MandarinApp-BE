@@ -14,6 +14,11 @@ const questionSchema = new Schema({
     correctAnswer: {
         type: Number,
         required: true,
+    },
+    clickedAnswer: {
+        type: Number,
+        required: true,
+        default: null,
     }
 }, { timestamps: true }
 );
