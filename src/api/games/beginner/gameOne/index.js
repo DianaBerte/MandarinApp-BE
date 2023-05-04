@@ -15,7 +15,7 @@ gamesRouter.post("/beginner/first", async (req, res, next) => {
     }
 })
 
-gamesRouter.get("/beginner/first", async (req, res, next) => {
+gamesRouter.get("/:beginner/:first", async (req, res, next) => {
     try {
         const games = await GamesModel.find()
         res.send(games)
