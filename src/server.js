@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import passport from "passport";
 import gamesRouter from "./api/games/beginner/gameOne/index.js";
+import { badRequestHandler, notFoundHandler, genericErrorHandler } from "./errorHandlers.js";
 
 const expressServer = express();
 
@@ -15,6 +16,8 @@ expressServer.use(passport.initialize());
 expressServer.use("/games", gamesRouter)
 
 //ERROR HANDLERS
-
+expressServer.use(badRequestHandler)
+expressServer.use(notFoundHandler)
+expressServer.use(genericErrorHandler)
 
 export { expressServer }
