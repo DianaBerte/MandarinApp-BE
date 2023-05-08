@@ -15,8 +15,6 @@ expressServer.use(cors());
 expressServer.use(express.json());
 expressServer.use(passport.initialize())
 
-expressServer.use(passport.initialize());
-
 //ENDPOINTS
 expressServer.use("/games", gamesRouter)
 expressServer.use("/users", usersRouter)
