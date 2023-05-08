@@ -7,7 +7,6 @@ export const JWTAuthMiddleware = async (req, res, next) => {
         next(createHttpError(401, "Please provide Bearer token in auth header."))
     } else {
         //2. If auth header is there, I extract the token out of it
-        //Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU4YzgwYjU5NzQxZDI5NTczZjQ0YzAiLCJyb2xlIjoiVXNlciIsImlhdCI6MTY4MzU0MDEyNiwiZXhwIjoxNjg0MTQ0OTI2fQ.fYjKzAwYHW_DvIyFHg6_2t-6dpdsmgKlxrEy_1o4HCc"
         const accessToken = req.headers.authorization.replace("Bearer ", "")
         try {
             //3. Verify token's integrity and check expir date
