@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import passport from "passport";
 import gamesRouter from "./api/games/beginner/gameOne/index.js";
-import { badRequestHandler, notFoundHandler, genericErrorHandler } from "./errorHandlers.js";
+import usersRouter from "./api/users/index.js";
+import { forbiddenErrorHandler, unauthorizedErrorHandler, badRequestHandler, notFoundHandler, genericErrorHandler } from "./errorHandlers.js";
 
 const expressServer = express();
 
@@ -14,9 +15,12 @@ expressServer.use(passport.initialize());
 
 //ENDPOINTS
 expressServer.use("/games", gamesRouter)
+expressServer.use("/users", usersRouter)
 
 //ERROR HANDLERS
 expressServer.use(badRequestHandler)
+expressServer.use(unauthorizedErrorHandler)
+expressServer.use(forbiddenErrorHandler)
 expressServer.use(notFoundHandler)
 expressServer.use(genericErrorHandler)
 
