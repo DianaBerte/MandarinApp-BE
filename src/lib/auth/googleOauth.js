@@ -24,7 +24,7 @@ const googleStrategy = new GoogleStrategy(
                     firstName: given_name,
                     lastName: family_name,
                     email,
-                    googleId: sub,
+                    googleId: sub, //sub is 'id' in Google
                 })
 
                 const createdUser = await newUser.save()
