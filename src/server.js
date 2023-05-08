@@ -4,12 +4,16 @@ import passport from "passport";
 import gamesRouter from "./api/games/beginner/gameOne/index.js";
 import usersRouter from "./api/users/index.js";
 import { forbiddenErrorHandler, unauthorizedErrorHandler, badRequestHandler, notFoundHandler, genericErrorHandler } from "./errorHandlers.js";
+import googleStrategy from "./lib/auth/googleOauth.js";
 
 const expressServer = express();
+
+passport.use("google", googleStrategy)
 
 //MIDDLEWARES
 expressServer.use(cors());
 expressServer.use(express.json());
+expressServer.use(passport.initialize())
 
 expressServer.use(passport.initialize());
 

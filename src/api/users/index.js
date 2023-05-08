@@ -4,8 +4,19 @@ import UsersModel from "./model.js"
 import { createAccessToken } from "../../lib/auth/tools.js";
 import { JWTAuthMiddleware } from "../../lib/auth/jwt.js";
 import { adminsOnlyMiddleware } from "../../lib/auth/admin.js";
+import passport from "passport";
 
 const usersRouter = express.Router()
+
+usersRouter.get("/googleLogin", passport.authenticate("google", { scope: ["profile", "email"] }))
+
+usersRouter.get("/googleRedirect", passport.authenticate("google", { session: false }), (req, res, next) => {
+    try {
+        res.redirect(`${process.env.FE_URL}?accessToken=${req.user.accessToken}`)
+    } catch (error) {
+        next(error)
+    }
+})
 
 usersRouter.post("/", async (req, res, next) => {
     try {
