@@ -2,10 +2,9 @@ import express from "express";
 import createHttpError from "http-errors";
 import GamesModel from "./model.js";
 
-
 const gamesRouter = express.Router()
 
-gamesRouter.post("/", async (req, res, next) => {
+gamesRouter.post("/beginner", async (req, res, next) => {
     try {
         const newGame = new GamesModel(req.body)
         const { _id } = await newGame.save()
@@ -16,7 +15,7 @@ gamesRouter.post("/", async (req, res, next) => {
     }
 })
 
-gamesRouter.get("/", async (req, res, next) => {
+gamesRouter.get("/beginner", async (req, res, next) => {
     try {
         const games = await GamesModel.find()
         res.send(games)
@@ -25,7 +24,7 @@ gamesRouter.get("/", async (req, res, next) => {
     }
 })
 
-gamesRouter.get("/:id", async (req, res, next) => {
+gamesRouter.get("/beginner/:id", async (req, res, next) => {
     try {
         const game = await GamesModel.findById(req.params.id);
         if (game) {
@@ -38,7 +37,7 @@ gamesRouter.get("/:id", async (req, res, next) => {
     }
 })
 
-gamesRouter.put("/:id", async (req, res, next) => {
+gamesRouter.put("/beginner/:id", async (req, res, next) => {
     try {
         const updatedGame = await GamesModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
         if (updatedGame) {
@@ -51,7 +50,7 @@ gamesRouter.put("/:id", async (req, res, next) => {
     }
 })
 
-gamesRouter.delete("/:id", async (req, res, next) => {
+gamesRouter.delete("/beginner/:id", async (req, res, next) => {
     try {
         const deletedGame = await GamesModel.findByIdAndDelete(req.params.id)
         if (deletedGame) {
