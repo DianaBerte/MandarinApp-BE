@@ -8,7 +8,7 @@ const filesRouter = express.Router()
 const cloudStorage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: "games/recordings",
+        folder: "games/audio",
     },
 })
 const cloudMulter = multer({ storage: cloudStorage })
