@@ -15,7 +15,7 @@ interGamesRouter.post("/intermediate", async (req, res, next) => {
     }
 })
 
-interGamesRouter.get("/intermediate/", async (req, res, next) => {
+interGamesRouter.get("/intermediate", async (req, res, next) => {
     try {
         const games = await InterGamesModel.find()
         res.send(games)
