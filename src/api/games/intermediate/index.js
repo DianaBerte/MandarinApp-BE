@@ -33,6 +33,15 @@ interGamesRouter.get("/intermediate/second", async (req, res, next) => {
     }
 })
 
+interGamesRouter.get("/intermediate/third", async (req, res, next) => {
+    try {
+        const games = await InterGamesModel.find()
+        res.send(games)
+    } catch (error) {
+        next(error)
+    }
+})
+
 interGamesRouter.get("/intermediate/:id", async (req, res, next) => {
     try {
         const game = await InterGamesModel.findById(req.params.id);
