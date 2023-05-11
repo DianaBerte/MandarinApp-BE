@@ -5,6 +5,10 @@ import { createAccessToken } from "../../lib/auth/tools.js";
 import { JWTAuthMiddleware } from "../../lib/auth/jwt.js";
 import { adminsOnlyMiddleware } from "../../lib/auth/admin.js";
 import passport from "passport";
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+
 
 const usersRouter = express.Router()
 
@@ -103,6 +107,8 @@ usersRouter.delete("/:id", JWTAuthMiddleware, adminsOnlyMiddleware, async (req, 
     }
 })
 
+// ************************************************************
+
 usersRouter.post("/login", async (req, res, next) => {
     try {
         //1. get user's credentials
@@ -124,5 +130,37 @@ usersRouter.post("/login", async (req, res, next) => {
         next(error)
     }
 })
+
+// ************************************************************
+
+const cloudinaryUploader = multer({
+    storage: new CloudinaryStorage({
+        cloudinary,
+        params: {
+            folder: "capstone/users",
+        },
+    }),
+}).single("image")
+
+usersRouter.post("/:id/profile/image", cloudinaryUploader, async (req, res, next) => {
+    try {
+        if (req.file) {
+            console.log("FILE: ", file);
+            const user = await UsersModel.findById(req.params.id);
+            if (user) {
+                user.image = req.file.path;
+                await user.save();
+                res.send("Profile image successfully uploaded.")
+            } else {
+                next(createHttpError(404, `User with id ${req.params.id} not found.`))
+            }
+        } else {
+            next(createHttpError(400, `Error in uploading the image`))
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+)
 
 export default usersRouter

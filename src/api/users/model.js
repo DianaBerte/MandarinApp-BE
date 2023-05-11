@@ -11,7 +11,11 @@ const UsersSchema = new Schema(
         password: { type: String, required: false },
         role: { type: String, required: true, enum: ["Admin", "User"], default: "User" },
         googleId: { type: String },
-        quizAnswers: { type: [String] }
+        quizAnswers: { type: [String] },
+        image: {
+            default: "https://res.cloudinary.com/degg5zebq/image/upload/v1683803529/UserImgPlaceholder_rvsfdh.png",
+            type: String,
+        }
     },
     { timestamps: true }
 )
