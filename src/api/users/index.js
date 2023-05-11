@@ -145,7 +145,7 @@ const cloudinaryUploader = multer({
 usersRouter.post("/:id/profile/image", cloudinaryUploader, async (req, res, next) => {
     try {
         if (req.file) {
-            console.log("FILE: ", file);
+            console.log("FILE: ", req.file);
             const user = await UsersModel.findById(req.params.id);
             if (user) {
                 user.image = req.file.path;
