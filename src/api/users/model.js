@@ -13,7 +13,7 @@ const UsersSchema = new Schema(
         googleId: { type: String },
         quizAnswers: { type: [String] },
         image: {
-            default: "https://res.cloudinary.com/degg5zebq/image/upload/v1683803529/UserImgPlaceholder_rvsfdh.png",
+            default: "https://res.cloudinary.com/degg5zebq/image/upload/v1683820402/UserImgPlaceholder_b9lgbn.png",
             type: String,
         }
     },
