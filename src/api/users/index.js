@@ -41,7 +41,25 @@ usersRouter.get("/", JWTAuthMiddleware, adminsOnlyMiddleware, async (req, res, n
     }
 })
 
-usersRouter.get("/me", JWTAuthMiddleware, async (req, res, next) => {
+// usersRouter.get("/profile/me", JWTAuthMiddleware, async (req, res, nect) => {
+//     try {
+//         const profile = await UsersModel.find({})
+//         res.send(profile)
+//     } catch (error) {
+//         next(error)
+//     }
+// })
+
+usersRouter.get("/profile/:id/image", JWTAuthMiddleware, async (req, res, next) => {
+    try {
+        const user = await UsersModel.findById(req.user._id)
+        res.send(user)
+    } catch (error) {
+        next(error)
+    }
+})
+
+usersRouter.get("/:id", async (req, res, next) => {
     try {
         const user = await UsersModel.findById(req.user._id)
         res.send(user)
