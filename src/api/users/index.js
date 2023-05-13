@@ -26,7 +26,9 @@ usersRouter.post("/", async (req, res, next) => {
     try {
         const newUser = new UsersModel(req.body)
         const { _id } = await newUser.save()
-        res.status(201).send({ _id })
+        const payload = { _id: _id };
+        const accessToken = await createAccessToken(payload);
+        res.status(201).send({ user: newUser, accessToken: accessToken })
     } catch (error) {
         next(error)
     }
