@@ -153,7 +153,7 @@ const cloudinaryUploader = multer({
     }),
 }).single("image")
 
-usersRouter.post("/:id/profile/image", cloudinaryUploader, async (req, res, next) => {
+usersRouter.post("/me/image", cloudinaryUploader, async (req, res, next) => {
     try {
         if (req.file) {
             console.log("FILE: ", req.file);
