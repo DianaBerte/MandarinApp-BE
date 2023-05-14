@@ -9,7 +9,7 @@ const UsersSchema = new Schema(
         lastName: { type: String, required: true },
         email: { type: String, required: true },
         password: { type: String, required: false },
-        role: { type: String, required: true, enum: ["Admin", "User"], default: "User" },
+        role: { type: String, required: false, enum: ["Admin", "User"], default: "User" },
         googleId: { type: String },
         quizAnswers: { type: [String] },
         image: {
