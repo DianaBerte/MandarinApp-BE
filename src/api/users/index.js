@@ -132,7 +132,7 @@ usersRouter.post("/login", async (req, res, next) => {
             //3.A: if credentials are okay, create an access token (JWT) and send it back as res
             const payload = { _id: user._id, role: user.role }
             const accessToken = await createAccessToken(payload)
-            res.send({ accessToken })
+            res.send({ accessToken, user })
         } else {
             //3.B: otherwise, trigger 401 error
             next(createHttpError(401, "Credentials are incorrect."))
