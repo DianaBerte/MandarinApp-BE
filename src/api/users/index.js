@@ -157,7 +157,7 @@ usersRouter.post("/me/image", JWTAuthMiddleware, cloudinaryUploader, async (req,
     try {
         if (req.file) {
             console.log("FILE: ", req.file);
-            const user = await UsersModel.findById(req.user._id);
+            const user = await UsersModel.findByIdAndUpdate(req.user._id, { ...req.body, image: req.file.path }, { new: true, runValidators: true });
             if (user) {
                 user.image = req.file.path;
                 await user.save();
