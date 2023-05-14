@@ -153,17 +153,17 @@ const cloudinaryUploader = multer({
     }),
 }).single("image")
 
-usersRouter.post("/me/image", cloudinaryUploader, async (req, res, next) => {
+usersRouter.post("/me/image", JWTAuthMiddleware, cloudinaryUploader, async (req, res, next) => {
     try {
         if (req.file) {
             console.log("FILE: ", req.file);
-            const user = await UsersModel.findById(req.params.id);
+            const user = await UsersModel.findById(req.user._id);
             if (user) {
                 user.image = req.file.path;
                 await user.save();
                 res.send("Profile image successfully uploaded.")
             } else {
-                next(createHttpError(404, `User with id ${req.params.id} not found.`))
+                next(createHttpError(404, `User with id ${req.user.id} not found.`))
             }
         } else {
             next(createHttpError(400, `Error in uploading the image`))
