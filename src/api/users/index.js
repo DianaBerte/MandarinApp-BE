@@ -35,8 +35,8 @@ usersRouter.post("/", async (req, res, next) => {
 })
 
 usersRouter.get("/",
-    // JWTAuthMiddleware, 
-    // adminsOnlyMiddleware, 
+    JWTAuthMiddleware,
+    adminsOnlyMiddleware,
     async (req, res, next) => {
         try {
             const users = await UsersModel.find({})
@@ -90,8 +90,8 @@ usersRouter.get("/:id", JWTAuthMiddleware, async (req, res, next) => {
 })
 
 usersRouter.put("/:id",
-    // JWTAuthMiddleware,
-    // adminsOnlyMiddleware, 
+    JWTAuthMiddleware,
+    adminsOnlyMiddleware,
     async (req, res, next) => {
         try {
             const updatedResource = await UsersModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
