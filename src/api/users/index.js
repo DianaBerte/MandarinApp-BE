@@ -34,9 +34,7 @@ usersRouter.post("/", async (req, res, next) => {
     }
 })
 
-usersRouter.get("/",
-    JWTAuthMiddleware,
-    adminsOnlyMiddleware,
+usersRouter.get("/", JWTAuthMiddleware, adminsOnlyMiddleware,
     async (req, res, next) => {
         try {
             const users = await UsersModel.find({})
@@ -46,8 +44,7 @@ usersRouter.get("/",
         }
     })
 
-usersRouter.get("/me",
-    JWTAuthMiddleware,
+usersRouter.get("/me", JWTAuthMiddleware,
     async (req, res, next) => {
         console.log("req.user: ", req.user)
         try {
@@ -89,21 +86,18 @@ usersRouter.get("/:id", JWTAuthMiddleware, async (req, res, next) => {
     }
 })
 
-usersRouter.put("/:id",
-    JWTAuthMiddleware,
-    adminsOnlyMiddleware,
-    async (req, res, next) => {
-        try {
-            const updatedResource = await UsersModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
-            if (updatedResource) {
-                res.send(updatedResource)
-            } else {
-                next(createHttpError(404, `User with id ${req.params.id} not found.`))
-            }
-        } catch (error) {
-            next(error)
+usersRouter.put("/:id", JWTAuthMiddleware, adminsOnlyMiddleware, async (req, res, next) => {
+    try {
+        const updatedResource = await UsersModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        if (updatedResource) {
+            res.send(updatedResource)
+        } else {
+            next(createHttpError(404, `User with id ${req.params.id} not found.`))
         }
-    })
+    } catch (error) {
+        next(error)
+    }
+})
 
 usersRouter.delete("/:id", JWTAuthMiddleware, adminsOnlyMiddleware, async (req, res, next) => {
     try {
