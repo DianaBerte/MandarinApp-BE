@@ -91,6 +91,7 @@ usersRouter.put("/:id", JWTAuthMiddleware, adminsOnlyMiddleware, async (req, res
         const updatedResource = await UsersModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
         if (updatedResource) {
             res.send(updatedResource)
+            console.log("updated resource: ", updatedResource)
         } else {
             next(createHttpError(404, `User with id ${req.params.id} not found.`))
         }
