@@ -13,5 +13,7 @@ export const verifyAccessToken = token =>
         jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
             if (err) reject(err)
             else resolve(payload)
+            console.log("payload in verifyAccessToken: ", payload)
+            console.log("error: ", error)
         })
     ) // input: token; output: Promise resolving into original payload
