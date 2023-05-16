@@ -5,6 +5,7 @@ export const createAccessToken = payload =>
         jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1 week" }, (err, token) => {
             if (err) reject(err)
             else resolve(token)
+            console.log("access token in createAccessToken: ", token)
         })
     ) // input: payload; output: Promise resolving into token
 
@@ -14,6 +15,6 @@ export const verifyAccessToken = token =>
             if (err) reject(err)
             else resolve(payload)
             console.log("payload in verifyAccessToken: ", payload)
-            console.log("error: ", error)
+            console.log("token in verifyAccessToken: ", token)
         })
     ) // input: token; output: Promise resolving into original payload
