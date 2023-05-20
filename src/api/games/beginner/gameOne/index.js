@@ -33,6 +33,15 @@ gamesRouter.get("/beginner/second", async (req, res, next) => {
     }
 })
 
+gamesRouter.get("/beginner/third", async (req, res, next) => {
+    try {
+        const games = await GamesModel.find()
+        res.send(games)
+    } catch (error) {
+        next(error)
+    }
+})
+
 gamesRouter.get("/beginner/:id", async (req, res, next) => {
     try {
         const game = await GamesModel.findById(req.params.id);
