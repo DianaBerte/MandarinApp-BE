@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import passport from "passport";
 import gamesRouter from "./api/games/beginner/gameOne/index.js";
+import interAudioGamesRouter from "./api/games/intermediate/audioIndex.js";
 import interGamesRouter from "./api/games/intermediate/index.js";
 import advGamesRouter from "./api/games/advanced/index.js";
 import usersRouter from "./api/users/index.js";
@@ -19,7 +20,7 @@ expressServer.use(express.json());
 expressServer.use(passport.initialize())
 
 //ENDPOINTS
-expressServer.use("/games", gamesRouter, interGamesRouter, advGamesRouter)
+expressServer.use("/games", gamesRouter, interGamesRouter, interAudioGamesRouter, advGamesRouter)
 expressServer.use("/users", usersRouter)
 expressServer.use("/files", filesRouter)
 
