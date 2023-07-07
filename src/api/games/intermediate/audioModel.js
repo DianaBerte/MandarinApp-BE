@@ -1,26 +1,26 @@
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 
-// const { Schema, model } = mongoose;
+const { Schema, model } = mongoose;
 
-// const questionSchema = new Schema({
-//     question: {
-//         type: String || Number,
-//         required: true,
-//     },
-//     answers: [{
-//         type: String || Number,
-//         required: true,
-//     }],
-//     correctAnswer: {
-//         type: String,
-//         required: true,
-//     }
-// }, { timestamps: true }
-// );
+const audioQuestionSchema = new Schema({
+    question: {
+        type: String || Number,
+        required: true,
+    },
+    answers: [{
+        type: String || Number,
+        required: true,
+    }],
+    correctAnswer: {
+        type: String,
+        required: true,
+    }
+}, { timestamps: true }
+);
 
-// const gameSchema = new Schema({
-//     question: [String],
-//     answers: [questionSchema]
-// })
+const audioGameSchema = new Schema({
+    question: [String],
+    answers: [audioQuestionSchema]
+})
 
-// export default model("AudioModel", gameSchema)
+export default model("AudioModel", audioGameSchema)

@@ -3,6 +3,7 @@ import createHttpError from "http-errors";
 import InterGamesModel from "./model.js"
 
 const interGamesRouter = express.Router()
+//should be interTextGamesRouter
 
 interGamesRouter.post("/intermediate", async (req, res, next) => {
     try {

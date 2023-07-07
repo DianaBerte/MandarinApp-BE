@@ -1,7 +1,7 @@
-// import express from "express"
+import express from "express"
 // import AudioModel from "./audioModel.js"
 
-// const interAudioRouter = express.Router()
+// const interAudioGamesRouter = express.Router()
 
 // interAudioRouter.post("/", async (req, res, next) => {
 //     try {
@@ -14,13 +14,13 @@
 //     }
 // })
 
-// interAudioRouter.get("/", async (req, res, next) => {
+// interAudioGamesRouter.get("/intermediateAudio/second", async (req, res, next) => {
 //     try {
-//         const games = await AudioModel.find()
-//         res.send(games)
+//         const audioGames = await AudioModel.find()
+//         res.send(audioGames)
 //     } catch (error) {
 //         next(error)
 //     }
 // })
 
-// export default interAudioRouter
+// export default interAudioGamesRouter
