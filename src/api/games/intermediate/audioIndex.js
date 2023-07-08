@@ -24,4 +24,17 @@ interAudioGamesRouter.get("/intermediateAudio/second", async (req, res, next) =>
     }
 })
 
+interAudioGamesRouter.put("/intermediateAudio/:id", async (req, res, next) => {
+    try {
+        const updatedGame = await AudioModel.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        if (updatedGame) {
+            res.send(updatedGame)
+        } else {
+            next(createHttpError(404, `Game with id ${req.params.id} not found!`))
+        }
+    } catch (error) {
+        next(error)
+    }
+})
+
 export default interAudioGamesRouter
