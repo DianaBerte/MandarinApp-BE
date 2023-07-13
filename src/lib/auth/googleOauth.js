@@ -2,6 +2,9 @@ import GoogleStrategy from "passport-google-oauth20"
 import UsersModel from "../../api/users/model.js"
 import { createAccessToken } from "./tools.js"
 
+// WATCH https://epicodeschool.webex.com/recordingservice/sites/epicodeschool/recording/6eac5684b677103bbfbddaa68df45d8d/playback
+// saved as "D12 - Testing & CI/CD" - April 6th
+
 const googleStrategy = new GoogleStrategy(
     {
         clientID: process.env.GOOGLE_ID,
