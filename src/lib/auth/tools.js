@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken"
 
+// ATTENTION: check https://github.com/nclBaz/epicode-u5-d9-4/blob/main/src/lib/auth/tools.js
+
 export const createAccessToken = payload =>
     new Promise((resolve, reject) =>
         jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1 week" }, (err, token) => {
