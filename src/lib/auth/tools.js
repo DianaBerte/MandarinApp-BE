@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 export const createAccessToken = payload =>
     new Promise((resolve, reject) =>
         jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1 week" }, (err, token) => {
+            console.log("secret key1: ", process.env.JWT_SECRET)
             if (err) reject(err)
             else resolve(token)
             console.log("access token in createAccessToken: ", token)
@@ -14,6 +15,7 @@ export const createAccessToken = payload =>
 export const verifyAccessToken = token =>
     new Promise((resolve, reject) =>
         jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
+            console.log("secret key2: ", process.env.JWT_SECRET)
             if (err) reject(err)
             else resolve(payload)
             console.log("payload in verifyAccessToken: ", payload)

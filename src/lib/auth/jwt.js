@@ -11,6 +11,7 @@ export const JWTAuthMiddleware = async (req, res, next) => {
         try {
             //3. Verify token's integrity and check expir date
             const payload = await verifyAccessToken(accessToken)
+            console.log("HELLO, verifyAccessToken")
             //4. If all right, I get back the payload
             req.user = { _id: payload._id, role: payload.role }
             console.log("req.user in JWTAuthMiddleware: ", req.user)
