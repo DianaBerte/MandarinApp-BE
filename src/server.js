@@ -7,7 +7,7 @@ import advGamesRouter from "./api/games/advanced/index.js";
 import usersRouter from "./api/users/index.js";
 import filesRouter from "./api/files/index.js";
 import { forbiddenErrorHandler, unauthorizedErrorHandler, badRequestHandler, notFoundHandler, genericErrorHandler } from "./errorHandlers.js";
-import googleStrategy from "./lib/auth/googleOauth.js";
+import googleStrategy from "./lib/auth/googleOauth.js"
 
 const expressServer = express();
 

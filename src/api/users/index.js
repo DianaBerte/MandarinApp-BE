@@ -12,15 +12,32 @@ import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 const usersRouter = express.Router()
 
-usersRouter.get("/googleLogin", passport.authenticate("google", { scope: ["profile", "email"] }))
+usersRouter.get("/googleLogin", passport.authenticate("google", { scope: ["email", "profile"] }))
 
-usersRouter.get("/googleRedirect", passport.authenticate("google", { session: false }), (req, res, next) => {
+usersRouter.get("/googleRedirect", passport.authenticate("google", { scope: ["email", "profile"], session: false }), (req, res, next) => {
     try {
+        const user = req.user;
+        console.log("user: ", user)
         res.redirect(`${process.env.FE_URL}?accessToken=${req.user.accessToken}`)
     } catch (error) {
         next(error)
     }
 })
+
+// usersRouter.get("/googleRedirect", passport.authenticate("google", { session: false }), async (req, res, next) => {
+//     try {
+//         const user = req.user;
+//         console.log("user: ", user)
+//         const payload = { _id: user._id, role: user.role };
+//         const accessToken = await createAccessToken(payload);
+
+//         console.log("payload: ", payload)
+
+//         res.redirect(`${process.env.FE_URL}?accessToken=${accessToken}`)
+//     } catch (error) {
+
+//     }
+// })
 
 usersRouter.post("/", async (req, res, next) => {
     try {
@@ -128,6 +145,7 @@ usersRouter.post("/login", async (req, res, next) => {
             const payload = { _id: user._id, role: user.role }
             const accessToken = await createAccessToken(payload)
             res.send({ accessToken, user })
+            console.log("YUUUUUUUHUUUUUUUUU, user:", user)
         } else {
             //3.B: otherwise, trigger 401 error
             next(createHttpError(401, "Credentials are incorrect."))
